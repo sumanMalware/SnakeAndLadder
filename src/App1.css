@@ -23,6 +23,103 @@ body {
     /* border: 5px solid rgb(59, 169, 156); */
     grid-gap: 7px;
 }
+.ghj{
+  margin-top: 10px;
+  z-index: 1;
+}
+.ladder1{
+  position: absolute;
+  height: 300px;
+  width: 90px;
+  rotate: -24deg;
+  margin-left: 45rem;
+  margin-top: 32rem;
+  opacity: 0.8;
+
+}
+.ladder2{
+  position: absolute;
+  height: 150px;
+  width: 100px;
+  rotate: -13deg;
+  margin-left: 224px;
+  margin-top: 48px;
+  opacity: 0.8;
+}
+.ladder3{
+  position: absolute;
+  height: 220px;
+  width: 100px;
+  rotate: 56deg;
+  margin-left: 631px;
+  margin-top: 95px;
+  opacity: 0.8;
+}
+.ladder4{
+  position: absolute;
+  height: 150px;
+  width: 100px;
+  rotate: -13deg;
+  margin-left: 415px;
+  margin-top: 390px;
+  opacity: 0.8;
+}
+.ladder5{
+  position: absolute;
+  height: 156px;
+  width: 100px;
+  rotate: 40deg;
+  margin-left: 40px;
+  margin-top: 466px;
+  opacity: 0.8;
+}
+.snake1{
+
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  margin-left: 34rem;
+  margin-top: 31rem;
+  /* opacity: 0.9; */
+
+}
+.snake2{
+
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  margin-left: 11.5rem;
+  margin-top: 36.2rem;
+  /* opacity: 0.9; */
+}
+.snake3{
+
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  margin-top: 10rem;
+
+}
+.snake4{
+
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  margin-left: 6rem;
+  margin-top: -8px;
+  opacity: 0.9;
+}
+.snake5{
+
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  margin-left: 45.5rem;
+  margin-top: 20.5rem;
+  opacity: 0.9;
+}
+
+
 #title {
     font-weight: bold;
     text-align: center;
@@ -39,17 +136,24 @@ body {
 
 .snakeClass{
 
-    background-color: brown;
+    /* background-color: brown; */
+    /* background-image: url('snakeGif.gif'); */
     border-radius: 10px;
     height: 4.6rem;
     width: 5rem;
+    color: rgb(255, 253, 253);
+    z-index: 1;
+    border: 1px solid rgb(238, 16, 16);
 
 }
+
 .laddersClass{
-    background-color: rgb(112, 171, 61);
+    /* background-color: rgb(112, 171, 61); */
     border-radius: 10px;
     height: 4.6rem;
     width: 5rem;
+    border : 1px solid rgb(37, 158, 37);
+    color: rgb(252, 253, 251);
 
 }
 .normal{
