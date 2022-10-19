@@ -70,17 +70,15 @@ const App1 = () => {
     const diceNumber = () => {
         PlayerTurn()
 
-
         let dice = Math.ceil(Math.random() * 6)
         document.getElementById("display").innerHTML = dice
 
         if (turn === "Player 1 Turn") {
-            document.getElementById("turn").style.color = "orange"
-        } else {
             document.getElementById("turn").style.color = "black"
+        } else {
+            document.getElementById("turn").style.color = "orange"
 
         }
-
 
         if (turn === "Player 1 Turn") {
 
@@ -94,21 +92,25 @@ const App1 = () => {
             }
             else if (snakes.includes(player1 + dice)) {
                 let index = snakes.indexOf(player1 + dice)
-                document.getElementById(toSnakes[player1 + dice]).style.backgroundColor = 'orange'
+                document.getElementById(toSnakes[index]).style.backgroundColor = 'orange'
                 setplayer1(toSnakes[index])
 
             }
             else {
-                document.getElementById(`${player1 + dice}`).style.backgroundColor = "orange"
-                setplayer1(player1 + dice)
+                if (player1 + dice === 100) {
+                    alert("Player : 1 won")
+                    refreshPage()
+                }
+                else if (player1 + dice > 100) {
+                    setplayer1(player1)
+                }
+                else {
+                    document.getElementById(`${player1 + dice}`).style.backgroundColor = 'orange'
+                    setplayer1(player1 + dice)
+                }
+
             }
-            if (player2 === 100) {
-                alert("Player : 2 won")
-                refreshPage()
-            }
-            else if (player2 > 100) {
-                setplayer2(player2 - dice)
-            }
+
         }
         // if(player1===player2){
         //     document.getElementById(player2).style.background = 'linear-gradient(to right,orange 0%,orange 50%,black 50%,black 100%)'
@@ -116,6 +118,7 @@ const App1 = () => {
         // }
 
         else if (turn === "Player 2 Turn") {
+            console.log(player1)
             document.getElementById(player2).style.backgroundColor = 'rgb(37, 126, 126)'
 
             if (snakes.includes(player2 + dice)) {
@@ -131,22 +134,17 @@ const App1 = () => {
 
             }
             else {
-                document.getElementById(`${player2 + dice}`).style.backgroundColor = "black"
-                setplayer2(player2 + dice)
-
-                // if(player1===player2){
-                //     document.getElementById(player1).style.background = 'linear-gradient(to right,orange 0%,orange 50%,black 50%,black 100%)'
-
-                // }
-            }
-
-            if (player1 === 100) {
-                alert("Player : 1 won")
-                refreshPage()
-
-            }
-            else if (player1 > 100) {
-                setplayer1(player1 - dice)
+                if (player2 + dice === 100) {
+                    alert("Player : 2 won")
+                    refreshPage()
+                }
+                else if (player2 + dice > 100) {
+                    setplayer2(player2)
+                }
+                else {
+                    document.getElementById(`${player2 + dice}`).style.backgroundColor = 'black'
+                    setplayer2(player2 + dice)
+                }
             }
 
         }
