@@ -1,204 +1,191 @@
-import React, { useState } from 'react'
-import './App1.css'
-import diceimg from './dice.png'
-import snakeladder from './snakeandladder.png'
-import ladder from './ladder.png'
-import snakegif from './snakeGif.gif'
-const App1 = () => {
+import React, { useState } from "react";
+import "./App1.css";
+import diceimg from "./dice.png";
+import snakeladder from "./snakeandladder.png";
+import ladder from "./ladder.png";
+import snakegif from "./snakeGif.gif";
 
+const App2 = () => {
+  function refreshPage() {
+    window.location.reload();
+  }
 
-    const refreshPage = () => {
-        window.location.reload();
+  const [p1position, setP1position] = useState(1);
+  const [p2position, setP2position] = useState(1);
+  const [dice, setdice] = useState(0);
+  function SnakeLadder(props) {
+    return <h1>{props.nums}</h1>;
+  }
+
+  let snakes = [23, 34, 52, 80, 99];
+  let ladders = [10, 21, 35, 67, 77];
+  let toLadders = [33, 42, 56, 89, 98];
+  let toSnakes = [2, 15, 31, 58, 76];
+
+  function classAssign(num) {
+    // let r = num.currentTarget.className
+
+    if (snakes.includes(num)) {
+      return "";
+    } else if (ladders.includes(num)) {
+      return "";
+    } else {
+      return 'rgb(37, 126, 126)';
+    }
+  }
+  function random() {
+    return Math.ceil(Math.random() * 6);
+  }
+  let numberArr = [];
+  for (let i = 100; i >= 1; i -= 10) {
+    if (i % 20 === 0) {
+      for (let j = i; j > i - 10; j--) {
+        numberArr.push(j);
+      }
+    } else {
+      for (let j = i - 9; j <= i; j++) {
+        numberArr.push(j);
+      }
+    }
+  }
+
+  const [turn, setturn] = useState("Start Game");
+  const PlayerTurn = () => {
+    setturn("Player 1 Turn");
+
+    let player = turn;
+
+    if (player === "Player 1 Turn") {
+      setturn("Player 2 Turn");
+    }
+  };
+
+  function btnClick() {
+    if (turn === "Player 1 Turn") {
+      setP1position(dice + p1position);
+      setdice(random());
+    } else if (turn === "Player 2 Turn") {
+      setdice(random());
+      setP2position(dice + p2position);
+    }
+  }
+  function diceNumber() {
+    btnClick();
+    PlayerTurn();
+
+    if (snakes.includes(p1position)) {
+      let index = snakes.indexOf(p1position);
+      setP1position(toSnakes[index]);
+    } else if (ladders.includes(p1position)) {
+      let index = ladders.indexOf(p1position);
+      setP1position(toLadders[index]);
+    } else {
+      if (p1position === 100) {
+        alert("Player : 1 won");
+        refreshPage();
+      } else if (p1position > 100) {
+        setP1position(p1position - random());
+      }
     }
 
-
-    function Dfr(props) {
-
-        return (<h1>{props.nums}</h1>)
-
+    if (snakes.includes(p2position)) {
+      let index = snakes.indexOf(p2position);
+      setP2position(toSnakes[index]);
+    } else if (ladders.includes(p2position)) {
+      let index = ladders.indexOf(p2position);
+      setP2position(toLadders[index]);
+    } else {
+      if (p2position === 100) {
+        alert("Player : 1 won");
+        refreshPage();
+      } else if (p2position > 100) {
+        setP2position(p2position - random());
+      }
     }
-    let numberArr = []
-    for (let i = 100; i >= 1; i -= 10) {
-        if (i % 20 === 0) {
-            for (let j = i; j > (i - 10); j--) {
-                numberArr.push(j)
+  }
 
-            }
-        } else {
-            for (let j = (i - 9); j <= i; j++) {
-                numberArr.push(j)
-
-            }
-        }
+  function Position(e) {
+    // p1position.toString() === value.toString() ? 'white' : 'blue'
+    if (p1position.toString() !== p2position.toString()) {
+      if (e.toString() === p1position.toString()) {
+        return "orange";
+      } else if (e.toString() === p2position.toString()) {
+        return "black";
+      } else {
+        return classAssign(e);
+      }
+    } else if (
+      e.toString() === p1position.toString() &&
+      e.toString() === p2position.toString()
+    ) {
+      return "linear-gradient(90deg,black 50%,orange 50%)";
+    } else {
+      return classAssign(e);
     }
+  }
+  return (
+    <div id="main">
+      <img src={ladder} alt="Ladder" className="ladder1" />
+      <img src={ladder} alt="Ladderr" className="ladder2" />
+      <img src={ladder} alt="Ladderr" className="ladder3" />
+      <img src={ladder} alt="Ladderr" className="ladder4" />
+      <img src={ladder} alt="Ladderr" className="ladder5" />
+      <img src={snakegif} alt="snake" className="snake1" />
+      <img src={snakegif} alt="snake" className="snake2" />
+      <img src={snakegif} alt="snake" className="snake3" />
+      <img src={snakegif} alt="snake" className="snake4" />
+      <img src={snakegif} alt="snake" className="snake5" />
 
-    let snakes = [23, 34, 52, 80, 99]
-    let ladders = [10, 21, 35, 67, 77]
-    let toLadders = [33, 42, 56, 89, 98]
-    let toSnakes = [2, 15, 31, 58, 76]
-
-    function classAssign(num) {
-
-        // let r = num.currentTarget.className
-
-        if (snakes.includes(num)) {
-            return 'snakeClass'
-
-        } else if (ladders.includes(num)) {
-            return 'laddersClass'
-
-        } else {
-            return 'normal'
-        }
-
-    }
-
-    const [turn, setturn] = useState("Start Game")
-    const PlayerTurn = () => {
-
-        setturn("Player 1 Turn")
-
-        let player = turn
-        if (player === "Player 1 Turn") {
-            setturn("Player 2 Turn")
-
-        }
-    }
-    const [player1, setplayer1] = useState(1);
-    const [player2, setplayer2] = useState(1);
-
-    const diceNumber = () => {
-        PlayerTurn()
-
-        let dice = Math.ceil(Math.random() * 6)
-        document.getElementById("display").innerHTML = dice
-
-        if (turn === "Player 1 Turn") {
-            document.getElementById("turn").style.color = "black"
-        } else {
-            document.getElementById("turn").style.color = "orange"
-
-        }
-
-        if (turn === "Player 1 Turn") {
-
-            document.getElementById(player1).style.backgroundColor = 'rgb(37, 126, 126)'
-
-            if (ladders.includes(player1 + dice)) {
-                let index = ladders.indexOf(player1 + dice)
-                document.getElementById(toLadders[index]).style.backgroundColor = 'orange'
-                setplayer1(toLadders[index])
-
-            }
-            else if (snakes.includes(player1 + dice)) {
-                let index = snakes.indexOf(player1 + dice)
-                document.getElementById(toSnakes[index]).style.backgroundColor = 'orange'
-                setplayer1(toSnakes[index])
-
-            }
-            else {
-                if (player1 + dice === 100) {
-                    alert("Player : 1 won")
-                    refreshPage()
-                }
-                else if (player1 + dice > 100) {
-                    setplayer1(player1)
-                }
-                else {
-                    document.getElementById(`${player1 + dice}`).style.backgroundColor = 'orange'
-                    setplayer1(player1 + dice)
-                }
-
-            }
-
-        }
-        // if(player1===player2){
-        //     document.getElementById(player2).style.background = 'linear-gradient(to right,orange 0%,orange 50%,black 50%,black 100%)'
-
-        // }
-
-        else if (turn === "Player 2 Turn") {
-            console.log(player1)
-            document.getElementById(player2).style.backgroundColor = 'rgb(37, 126, 126)'
-
-            if (snakes.includes(player2 + dice)) {
-                let index = snakes.indexOf(player2 + dice)
-                document.getElementById(toSnakes[index]).style.backgroundColor = 'black'
-                setplayer2(toSnakes[index])
-
-            }
-            else if (ladders.includes(player2 + dice)) {
-                let index = ladders.indexOf(player2 + dice)
-                document.getElementById(toLadders[index]).style.backgroundColor = 'black'
-                setplayer2(toLadders[index])
-
-            }
-            else {
-                if (player2 + dice === 100) {
-                    alert("Player : 2 won")
-                    refreshPage()
-                }
-                else if (player2 + dice > 100) {
-                    setplayer2(player2)
-                }
-                else {
-                    document.getElementById(`${player2 + dice}`).style.backgroundColor = 'black'
-                    setplayer2(player2 + dice)
-                }
-            }
-
-        }
-    }
-    return (
-        <div id='main'>
-            {/* <div className="ghj">
-                <h1>Hey</h1>
-                <img src="ladder.png" alt="" />
-            </div> */}
-            <img src={ladder} alt="Ladder" className='ladder1' />
-            <img src={ladder} alt="Ladderr" className='ladder2' />
-            <img src={ladder} alt="Ladderr" className='ladder3' />
-            <img src={ladder} alt="Ladderr" className='ladder4' />
-            <img src={ladder} alt="Ladderr" className='ladder5' />
-            <img src={snakegif} alt="snake" className='snake1' />
-            <img src={snakegif} alt="snake" className='snake2' />
-            <img src={snakegif} alt="snake" className='snake3' />
-            <img src={snakegif} alt="snake" className='snake4' />
-            <img src={snakegif} alt="snake" className='snake5' />
-
-
-
-            <div className="gridcdclass">
-                {numberArr.map(value => <div className={classAssign(value)} id={value.toString()} ><Dfr nums={value} />
-                </div>)}
-                {/* <div><img src={ladder} alt="ladder" id='ladder' /></div> */}
-            </div>
-            <div id='container'>
-                <div className="one">
-                    <div><h1>Player <span className="num1">1</span> position : <span className='playerpoint'>{player1}</span></h1></div><br />
-                    <div><h1>Player <span className="num2">2</span> position : <span className='playerpoint'>{player2}</span></h1></div>
-                    <div className="tv"><h2 id='turn'>{turn}</h2>
-
-
-                    </div>
-                </div>
-                <div className="two">
-                    <div><img src={snakeladder} alt="snakel" id='laddersnake' /></div>
-                </div>
-                <div className="three">
-                    <div className="dicepoint"><h1 id='display'>0</h1></div>
-                    <div className="dicepoint2" ><img src={diceimg} alt="dice" id='diceimg' onClick={diceNumber} /></div>
-                </div>
-                <button onClick={refreshPage} id="refresh"><h2>RESET GAME</h2></button>
-
-
-
-
-            </div>
-
-
+      <div className="gridclass">
+        {numberArr.map((value) => (
+          <div
+            className={classAssign(value)}
+            id={value.toString()}
+            style={{ background: Position(value) }}
+          >
+            <SnakeLadder nums={value} />
+          </div>
+        ))}
+        {/* <div><img src={ladder} alt="ladder" id='ladder' /></div> */}
+      </div>
+      <div id="container">
+        <div className="one">
+          <div>
+            <h1>
+              Player <span className="num1">1</span> position :{" "}
+              <span className="playerpoint">{p1position}</span>
+            </h1>
+          </div>
+          <br />
+          <div>
+            <h1>
+              Player <span className="num2">2</span> position :{" "}
+              <span className="playerpoint">{p2position}</span>
+            </h1>
+          </div>
+          <div className="tv">
+            <h2 id="turn">{turn}</h2>
+          </div>
         </div>
-    )
-}
+        <div className="two">
+          <div>
+            <img src={snakeladder} alt="snakel" id="laddersnake" />
+          </div>
+        </div>
+        <div className="three">
+          <div className="dicepoint">
+            <h1 id="display">{dice}</h1>
+          </div>
+          <div className="dicepoint2">
+            <img src={diceimg} alt="dice" id="diceimg" onClick={diceNumber} />
+          </div>
+        </div>
+        <button onClick={refreshPage} id="refresh">
+          <h2>RESET GAME</h2>
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default App1
+export default App2;
