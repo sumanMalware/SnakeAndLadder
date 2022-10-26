@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App2.css";
+import "./App1.css";
 import diceimg from "./dice.png";
 import snakeladder from "./snakeandladder.png";
 import ladder from "./ladder.png";
