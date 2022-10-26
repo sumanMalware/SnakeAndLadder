@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App1.css";
+import "./App2.css";
 import diceimg from "./dice.png";
 import snakeladder from "./snakeandladder.png";
 import ladder from "./ladder.png";
@@ -33,9 +33,8 @@ const App2 = () => {
       return 'rgb(37, 126, 126)';
     }
   }
-  function random() {
-    return Math.ceil(Math.random() * 6);
-  }
+
+
   let numberArr = [];
   for (let i = 100; i >= 1; i -= 10) {
     if (i % 20 === 0) {
@@ -61,12 +60,16 @@ const App2 = () => {
   };
 
   function btnClick() {
+
+    
     if (turn === "Player 1 Turn") {
-      setP1position(dice + p1position);
-      setdice(random());
-    } else if (turn === "Player 2 Turn") {
-      setdice(random());
+      setdice(Math.ceil(Math.random() * 6))
       setP2position(dice + p2position);
+      
+    } else if (turn === "Player 2 Turn") {
+      setdice(Math.ceil(Math.random() * 6))
+      
+      setP1position(dice + p1position);
     }
   }
   function diceNumber() {
@@ -80,11 +83,11 @@ const App2 = () => {
       let index = ladders.indexOf(p1position);
       setP1position(toLadders[index]);
     } else {
-      if (p1position === 100) {
+      if (p1position+dice === 100) {
         alert("Player : 1 won");
         refreshPage();
-      } else if (p1position > 100) {
-        setP1position(p1position - random());
+      } else if (p1position+dice > 100) {
+        setP1position(p1position - dice);
       }
     }
 
@@ -95,11 +98,11 @@ const App2 = () => {
       let index = ladders.indexOf(p2position);
       setP2position(toLadders[index]);
     } else {
-      if (p2position === 100) {
+      if (p2position+dice === 100) {
         alert("Player : 1 won");
         refreshPage();
-      } else if (p2position > 100) {
-        setP2position(p2position - random());
+      } else if (p2position+dice > 100) {
+        setP2position(p2position - dice);
       }
     }
   }
