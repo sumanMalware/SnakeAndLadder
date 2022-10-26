@@ -12,7 +12,6 @@ const App2 = () => {
 
   const [p1position, setP1position] = useState(1);
   const [p2position, setP2position] = useState(1);
-  const [dice, setdice] = useState(0);
   function SnakeLadder(props) {
     return <h1>{props.nums}</h1>;
   }
@@ -59,52 +58,62 @@ const App2 = () => {
     }
   };
 
-  function btnClick() {
 
-    
-    if (turn === "Player 1 Turn") {
-      setdice(Math.ceil(Math.random() * 6))
-      setP2position(dice + p2position);
-      
-    } else if (turn === "Player 2 Turn") {
-      setdice(Math.ceil(Math.random() * 6))
-      
-      setP1position(dice + p1position);
-    }
-  }
-  function diceNumber() {
-    btnClick();
+
+
+  let dice = Math.ceil(Math.random() * 6)
+
+  const diceNumber = () => {
+
+
     PlayerTurn();
+    if (turn === "Player 1 Turn") {
 
-    if (snakes.includes(p1position)) {
-      let index = snakes.indexOf(p1position);
-      setP1position(toSnakes[index]);
-    } else if (ladders.includes(p1position)) {
-      let index = ladders.indexOf(p1position);
-      setP1position(toLadders[index]);
-    } else {
-      if (p1position+dice === 100) {
-        alert("Player : 1 won");
-        refreshPage();
-      } else if (p1position+dice > 100) {
-        setP1position(p1position - dice);
+      if (snakes.includes(p1position)) {
+        let index = snakes.indexOf(p1position);
+        setP1position(toSnakes[index]);
+      } else if (ladders.includes(p1position)) {
+        let index = ladders.indexOf(p1position);
+        setP1position(toLadders[index]);
+      } else {
+        if (p1position + dice === 100) {
+          alert("Player : 1 won");
+          refreshPage();
+        } else if (p1position + dice > 100) {
+          setP1position(p1position);
+        } else {
+          setP1position(dice + p1position)
+        }
       }
+
+
+
+    } else if (turn === "Player 2 Turn") {
+
+      if (snakes.includes(p2position)) {
+        let index = snakes.indexOf(p2position);
+        setP2position(toSnakes[index]);
+      } else if (ladders.includes(p2position)) {
+        let index = ladders.indexOf(p2position);
+        setP2position(toLadders[index]);
+      } else {
+        if (p2position + dice === 100) {
+          alert("Player : 1 won");
+          refreshPage();
+        } else if (p2position + dice > 100) {
+          setP2position(p2position);
+        } else {
+          setP2position(dice + p2position)
+        }
+      }
+
+
     }
 
-    if (snakes.includes(p2position)) {
-      let index = snakes.indexOf(p2position);
-      setP2position(toSnakes[index]);
-    } else if (ladders.includes(p2position)) {
-      let index = ladders.indexOf(p2position);
-      setP2position(toLadders[index]);
-    } else {
-      if (p2position+dice === 100) {
-        alert("Player : 1 won");
-        refreshPage();
-      } else if (p2position+dice > 100) {
-        setP2position(p2position - dice);
-      }
-    }
+
+
+
+
   }
 
   function Position(e) {
